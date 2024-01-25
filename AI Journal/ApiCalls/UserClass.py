@@ -3,6 +3,7 @@ class User:
         self.username = user_name
         self.email = email
         self.contact_number = contact_number
+
     def get_username(self):
         return self.username
 
