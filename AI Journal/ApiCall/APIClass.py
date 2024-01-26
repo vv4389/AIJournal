@@ -7,14 +7,15 @@ from WeatherApi import WeatherAPI
 from LocationApi import LocationApi
 
 if __name__ == "__main__":
-    address = '286 E Squire Dr, Rochester, NY, USA'
+    address = '1200 Frank E Rodgers Blvd South, Harrison, NJ'
     user = User("Viraj","vv4389@gmail.com","+1 5855536727")
 
     location = LocationApi(user)
     lati, longi = location.get_lati_longi(address)
-    weather = WeatherAPI(user)
+    weather = WeatherAPI(user).get_weather(lati,longi,datetime.now())
     print("Test LocationAPI")
+    print(f"{user}")
+    print(f"Address: {address}")
     print(f"Latitude: {lati}")
-    print(f"Longitude: {longi}\n\n\n")
-
-    print(weather.get_weather(lati,longi,datetime.now()))
+    print(f"Longitude: {longi}")
+    print(f"Weather: {weather}")
