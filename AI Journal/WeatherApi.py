@@ -17,6 +17,8 @@ class WeatherAPI:
         # weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windspeed&timesteps=1h&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
         weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windSpeed,precipitationIntensity,precipitationType&timesteps=30m&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
         print(weather_url)
+        weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windSpeed,precipitationIntensity,precipitationType&timesteps=1h&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
+        # print(weather_url)
         response = requests.get(weather_url)
         if response.status_code == 200:
             data = response.json()
