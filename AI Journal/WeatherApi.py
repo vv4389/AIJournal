@@ -3,6 +3,7 @@ from datetime import datetime
 import requests
 
 from UserClass import User
+from LocationApi import LocationApi
 class WeatherAPI:
     def __init__(self, user:User, weather_Api='1OwOEbF9KD4XBisiewEdGgEMhrpsI01v'):
         self.user = user
@@ -10,11 +11,11 @@ class WeatherAPI:
 
     def __get_weather(self, latitude, longitude,timestamp):
         default_precipitation = {"1": "Rain","2": "Snow","3": "Freezing Rain","4": "Ice Pellets / Sleet"}
-        startTime = self.__get_formatted_timestamp(timestamp,-12)
-        endTime = self.__get_formatted_timestamp(timestamp,12)
+        startTime = self.__get_formatted_timestamp(timestamp,-6)
+        endTime = self.__get_formatted_timestamp(timestamp,6)
         timestamp = self.__get_formatted_timestamp(timestamp,0)
         # weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windspeed&timesteps=1h&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
-        weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windSpeed,precipitationIntensity,precipitationType&timesteps=1h&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
+        weather_url =  f'https://api.tomorrow.io/v4/timelines?location={latitude},{longitude}&fields=temperature,humidity,windSpeed,precipitationIntensity,precipitationType&timesteps=30m&startTime={startTime}&endTime={endTime}&units=metric&apikey={self.__weather_api}'
         print(weather_url)
         response = requests.get(weather_url)
         if response.status_code == 200:
@@ -79,3 +80,16 @@ class WeatherAPI:
             timestamp = "{0}T{1}:{2}:{3}Z".format(str(currentDate.date()), f"24",
                                              f"59", f"59")
         return timestamp
+
+if __name__ == "__main__":
+    address = '286 E Squire Dr, Rochester, NY, USA'
+    user = User("Viraj","vv4389@gmail.com","+1 5855536727")
+
+    location = LocationApi(user)
+    lati, longi = location.get_lati_longi(address)
+    weather = WeatherAPI(user)
+    print("Test LocationAPI")
+    print(f"Latitude: {lati}")
+    print(f"Longitude: {longi}\n\n\n")
+
+    print(weather.get_weather(lati,longi,datetime.now()))
