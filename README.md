@@ -1,45 +1,54 @@
-🚀 Exciting News! Introducing my latest project - JournalAI 📸📖
+# JournalAI 📖
 
-🌐 Project Overview:
+**Elevate Your Journaling Experience with AI!**
+Welcome to JournalAI, where the magic of journaling meets the sophistication of artificial intelligence. 🚀 Users can effortlessly transform their photos into personalized, AI-crafted journal entries, making each memory a unique and enchanting narrative.
+## ✨ Key Features
 
-I'm thrilled to present JournalAI, a cutting-edge project that combines the art of journaling with the power of AI. Taking inspiration from Apple's journal application, JournalAI allows users to effortlessly create personalized journal entries by uploading photos. The LLAVA-13B model then crafts unique narratives based on the visual memories captured, powered by Replicate's seamless integration for calling the LLAVA-13B API.
+- **AI-Generated Journal Entries:** Utilize advanced AI to create personalized narratives from uploaded photos.
+- **Seamless Integration:** Integrates with Google Location and Weather APIs for added context.
+- **Secure Image Storage:** Store user-uploaded images securely on Google Storage with fine-grain access controls.
+- **Manual Metadata Entry:** Provision for users to manually enter missing metadata through an intuitive interface.
 
-💡 Key Features:
+## 🌐 System Flow:
+**User Interaction:**
+- Begin your journey by uploading photos through our streamlined and user-friendly interface.
 
-AI-Generated Journal Entries 🤖📝
+**Metadata Handling:**
+- Our system checks for essential metadata. If missing, you have the flexibility to manually input details through a user-friendly interface.
+  
+**Google Location API:**
+- Let the Google Location API extract location metadata, enriching your narrative with a sense of place.
 
-Personalized Narratives from Uploaded Photos 🌟📷
+**VisualCrossing API (Weather Data):**
+- Elevate your story with weather data from the VisualCrossing API, creating a rich and contextualized journal entry.
 
-Seamless Integration with Google Location and Weather APIs 🌍🌦️
+**Google Storage for Image Storage:**
+- Entrust your memories to us. We securely store your images on Google Storage with fine-grain access controls.
 
-Secure Image Storage on Google Storage with Fine-Grain Access Controls 🔒📂
+**LLAVA-13B Model via Replicate API:**
+- The heart of the magic lies in the LLAVA-13B model, seamlessly integrated through Replicate for AI-generated journal entries.
 
-Provision to Manually Enter Missing Metadata 🌐📆📍
+**Error Logging and Caching:**
+- Our robust system logs errors and implements caching for optimal performance and reliability.
 
-🌐 System Design:
+**User Output:**
+- Witness the transformation! Your final AI-generated journal entry, complete with location, weather data, and personal touches.
 
-Utilizing Google Location API to Extract Location Metadata 📍
+## 🛠️ Tech Stack
 
-VisualCrossing API for Weather Data Retrieval ⛅
+- Python
+- Streamlit for Frontend
+- Google Cloud Services (Location API, Storage API)
+- VisualCrossing API
+- LLAVA-13B Model via Replicate API
+- Error Logging and Caching Implementation for Robust Performance
 
-Google Storage API for Secure Image Storage 🖼️
+## 🚀 Getting Started:
+**Clone the Repository:**
+git clone https://github.com/your-username/JournalAI.git
 
-LLAVA-13B Model for AI-Generated Journal Entries, powered by Replicate 🧠💬
+**Install Dependencies:**
+pip install -r requirements.txt
 
-🛠️ Tech Stack:
-
-Python
-
-Streamlit for Frontend
-
-Google Cloud Services (Location API, Storage API)
-
-VisualCrossing API
-
-LLAVA-13B Model via Replicate API
-
-Error Logging and Caching Implementation for Robust Performance 🚀🛡️
-
-🔔 Note: The JournalAI project will be live for the next 2 months (April 6th, 2024), as the GCP free version used for hosting will expire. Run JournalAI and turn your photos into beautifully crafted journal entries before it concludes!
-
-🌐 Try it out: https://huggingface.co/spaces/vv4389/AIJournal
+**Run the Application:**
+streamlit run app.py
