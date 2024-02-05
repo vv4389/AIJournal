@@ -26,10 +26,13 @@ class ProjectRun:
     def SystemRun(self):
         logging.info(f"Main.py: {datetime.utcnow()}")
         if self.img:
-            latitude, longitude, date, address = ImageMetaData(st).GetCoordinates(self.img)
-            if latitude is not None and longitude is not None and date is not None and address is not None:
+            latitude, longitude, date, address = ImageMetaData().GetCoordinates(self.img)
+            if latitude is not None and \
+                    longitude is not None and \
+                    date is not None and \
+                    address is not None:
+
                 weather = WeatherApi().get_weather_data((latitude, longitude), date)
-                print(weather)
                 if weather is not None:
                     time.sleep(1)
                     if testing:
@@ -41,7 +44,6 @@ class ProjectRun:
                         print(f"        Weather: {weather}")
                     img_url = self.__storage_management.create_uri(_user=self.user, _img=self.img)
                     if address is not None and len(address) > 3:
-                        print(f"Address: {address}")
                         output_data = f"        Summary: {process_image_with_weather(image_url=img_url, address=address, weather_data=weather)}"
                         self.__storage_management.blob_make_private(_user=self.user)
                         self.__storage_management.delete_blob(_user=self.user)
@@ -54,5 +56,5 @@ if __name__ == "__main__":
     import SetupEnv
     testing = True
     SetupEnv.setup()
-    img = Image.open("IMG_7223.JPG")
+    img = Image.open("FamilyCamping-2021-GettyImages-948512452-2.webp")
     print(ProjectRun(User(img), img, st).SystemRun())

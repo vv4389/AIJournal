@@ -8,7 +8,6 @@ import streamlit as st
 configure_logging()
 
 
-@st.cache_resource(show_spinner=False)
 def process_image_with_weather(image_url, address, weather_data):
     try:
         rep = replicate.Client(api_token=os.environ.get("llm_api_key"))
@@ -29,4 +28,4 @@ def process_image_with_weather(image_url, address, weather_data):
         return sentence
     except Exception as e:
         logging.warning(f"LLM API failed!:\n{e}")
-        return "LLM MODEL ERROR: MODEL FAILED!! PLEASE TRY AGAIN AFTER SOMETIME, THANK YOU FOR TRYING OUT THE SYSTEM!!!"
+        return f"LLM MODEL ERROR: MODEL FAILED!! PLEASE TRY AGAIN AFTER SOMETIME, THANK YOU FOR TRYING OUT THE SYSTEM!!!\n{e}"

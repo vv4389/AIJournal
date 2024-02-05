@@ -1,14 +1,15 @@
-import logging
-from logging_config import configure_logging
-from PIL import Image
-from UserClass import User
-import streamlit as st
 
 try:
+    import logging
+    from PIL import Image
+    from UserClass import User
+    from logging_config import configure_logging
     import os
     from google.cloud import storage
     from datetime import datetime, timedelta
     import json
+    import streamlit as st
+
 except Exception as e:
     logging.warning(f"Error importing modules in StorageApi:\n{e}")
 
@@ -21,7 +22,6 @@ class StorageManagement:
         self.__bucket_name = os.environ.get("storage_bucket_name")
         try:
             json_data_str = os.environ.get("gcp_credentials")
-            print(json_data_str)
             json_data = json.loads(json_data_str)
             self.__storage_client = storage.Client.from_service_account_info(json_data)
         except Exception as e:
@@ -44,7 +44,7 @@ class StorageManagement:
         def delete(self):
             self.__blob.delete()
 
-    @st.cache_resource(show_spinner=False)
+
     def __upload_file_to_cloud_storage(_self, _blob, local_file_path, destination):
         """Uploads a file to Google Cloud Storage."""
         try:
@@ -53,7 +53,7 @@ class StorageManagement:
         except Exception as e:
             logging.warning(f"GCP UPLOAD FAILED!:\n{e}")
 
-    @st.cache_resource(show_spinner=False)
+
     def __make_file_public(_self, _blob: Blob):
         """Makes the image object in Cloud Storage public."""
         try:
@@ -66,7 +66,7 @@ class StorageManagement:
         """Gets the public URI of the image in Cloud Storage."""
         return f"https://storage.googleapis.com/{_self.__bucket_name}/{blob.blob_name}"
 
-    @st.cache_resource(show_spinner=False)
+
     def blob_make_private(_self, _user):
         if _user.uid in _self.__blobs:
             try:
@@ -78,7 +78,7 @@ class StorageManagement:
             except Exception as e:
                 logging.warning(f"Blob Error: Privatization error!! \n{e}")
 
-    @st.cache_resource(show_spinner=False)
+
     def create_uri(_self, _user, _img):
         destination = '{0}{1}.JPG'.format(os.environ.get('destination_blob_path'), str(_user.uid))
         if _user.uid not in _self.__blobs:
@@ -104,7 +104,7 @@ class StorageManagement:
         except Exception as e:
             logging.warning(f"GCP CLIENT CLOSE ERROR!:\n{e}")
 
-    @st.cache_resource(show_spinner=False)
+
     def delete_blob(_self, _user):
         if _user.uid in _self.__blobs:
             try:
@@ -129,6 +129,6 @@ if __name__ == "__main__":
     img = Image.open(local_file)
     username = User(img)
     blob1 = StorageManagement()
-    print(blob1.create_uri(username, img=img))
-    blob1.blob_make_private(user=username)
-    blob1.delete_blob(user=username)
+    print(blob1.create_uri(username, _img=img))
+    blob1.blob_make_private(_user=username)
+    blob1.delete_blob(_user=username)

@@ -13,7 +13,7 @@ class WeatherApi:
     def __init__(self):
         self.__weather_api = os.environ.get("VCWeatherApiKey")
 
-    @st.cache_resource(show_spinner=False)
+
     def get_weather_data(_self, location, date):
         jsonData = None
         if location[0] is not None and location[1] is not None and date is not None and len(date) > 1:

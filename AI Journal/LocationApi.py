@@ -12,7 +12,7 @@ class LocationApi:
     def __init__(self):
         self.__google_api = os.environ.get("google_Api_Key")
 
-    @st.cache_resource(show_spinner=False)
+
     def __get_coordinates(_self, address):
         url = 'https://maps.googleapis.com/maps/api/geocode/json'
 
@@ -33,18 +33,18 @@ class LocationApi:
 
             else:
                 logging.warning(f"Location API Error:\n{data['error_message']}")
-                return 0, 0
+                return None, None
 
         else:
 
             logging.warning("Location API Error: Failed to make the request.")
-            return 0, 0
+            return None, None
 
-    @st.cache_resource(show_spinner=False)
+
     def get_coordinates(_self, address):
         return _self.__get_coordinates(address)
 
-    @st.cache_resource(show_spinner=False)
+
     def get_address(_self, latitude, longitude):
         # Google Maps Geocoding API endpoint
         api_endpoint = "https://maps.googleapis.com/maps/api/geocode/json"
