@@ -40,6 +40,6 @@ LLAVA-13B Model via Replicate API
 
 Error Logging and Caching Implementation for Robust Performance 🚀🛡️
 
-🔔 Note: The JournalAI project will be live for the next 2 months, as the GCP free version used for hosting will expire. Run JournalAI and turn your photos into beautifully crafted journal entries before it concludes!
+🔔 Note: The JournalAI project will be live for the next 2 months (April 6th, 2024), as the GCP free version used for hosting will expire. Run JournalAI and turn your photos into beautifully crafted journal entries before it concludes!
 
 🌐 Try it out: https://huggingface.co/spaces/vv4389/AIJournal
