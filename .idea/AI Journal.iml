@@ -3,8 +3,12 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/AI_journal" />
+      <excludeFolder url="file://$MODULE_DIR$/AI_journal 3.9" />
+      <excludeFolder url="file://$MODULE_DIR$/AI_journal1" />
+      <excludeFolder url="file://$MODULE_DIR$/AI_journal3.11" />
+      <excludeFolder url="file://$MODULE_DIR$/AI_journal3.9" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (Projects)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

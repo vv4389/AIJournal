@@ -1,14 +1,20 @@
-class User:
-    def __init__(self, user_name, email, contact_number):
-        self.username = user_name
-        self.email = email
-        self.contact_number = contact_number
+import random
+from PIL import Image
 
-    def get_username(self):
-        return self.username
+
+class User:
+    def __init__(self, img):
+        self.uid = random.randrange(start=100000000, stop=999999999)
+        self.img = img
+
+    def get_userid(self):
+        return self.uid
 
     def __str__(self):
-        return f'User: {self.username}\nEmail: {self.email}\nContact: {self.contact_number}'
+        return f'User: {self.uid}'
+
+
 if __name__ == "__main__":
-    user = User("Viraj","vv4389@gmail.com","+1 5855536727")
+    img = Image.open("FamilyCamping-2021-GettyImages-948512452-2.webp")
+    user = User(random.randrange(start=100000000, stop=999999999), img)
     print(user)

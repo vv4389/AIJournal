@@ -1,59 +1,79 @@
+import os
+
 import requests
-from UserClass import User
+import logging
+from logging_config import configure_logging
+import streamlit as st
+
+
 class LocationApi:
-    def __init__(self, user:User, google_Api='AIzaSyAGQjDk_YJywo3mcL5ZsklXEr3nCat1FtQ'):
-        self.user = user
-        self.__google_api = google_Api
+    configure_logging()
 
+    def __init__(self):
+        self.__google_api = os.environ.get("google_Api_Key")
 
-    def __get_lati_longi__(self, address):
+    @st.cache_resource(show_spinner=False)
+    def __get_coordinates(_self, address):
         url = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         params = {
-
             "address": address,
-
-            "key": self.__google_api
-
+            "key": _self.__google_api
         }
 
         response = requests.get(url, params=params)
 
         if response.status_code == 200:
-
             data = response.json()
-
             if data["status"] == "OK":
-
                 location = data["results"][0]["geometry"]["location"]
-
                 lat = location["lat"]
-
                 lng = location["lng"]
-
                 return lat, lng
 
             else:
-
-                print(f"Error: {data['error_message']}")
-
+                logging.warning(f"Location API Error:\n{data['error_message']}")
                 return 0, 0
 
         else:
 
-            print("Failed to make the request.")
-
+            logging.warning("Location API Error: Failed to make the request.")
             return 0, 0
 
-    def get_lati_longi(self, address):
-        return self.__get_lati_longi__(address)
+    @st.cache_resource(show_spinner=False)
+    def get_coordinates(_self, address):
+        return _self.__get_coordinates(address)
+
+    @st.cache_resource(show_spinner=False)
+    def get_address(_self, latitude, longitude):
+        # Google Maps Geocoding API endpoint
+        api_endpoint = "https://maps.googleapis.com/maps/api/geocode/json"
+
+        # Prepare parameters for the API request
+        params = {
+            'latlng': f'{latitude},{longitude}',
+            'key': _self.__google_api,
+        }
+
+        # Make the API request
+        response = requests.get(api_endpoint, params=params)
+        result = response.json()
+
+        # Check if the request was successful
+        if response.status_code == 200 and result['status'] == 'OK':
+            # Extract the formatted address from the first result
+            formatted_address = result['results'][0]['formatted_address']
+            return formatted_address
+        else:
+            logging.warning(f"LocationApi error: get_address failed: {latitude}, {longitude} :\n{response.json()}")
+            return None
+
 
 if __name__ == "__main__":
-    address = '286 E Squire Dr, Rochester, NY, USA'
-    user = User("Viraj","vv4389@gmail.com","+1 5855536727")
-
-    location = LocationApi(user)
-    lati, longi = location.get_lati_longi(address)
+    test_address = '286 E Squire Dr, Rochester, NY, USA'
+    lati, longi = LocationApi().get_coordinates(test_address)
+    new_address = LocationApi().get_address(lati, longi)
     print("Test LocationAPI")
     print(f"Latitude: {lati}")
-    print(f"Longitude: {longi}\n\n\n")
+    print(f"Longitude: {longi}")
+    print(f"fetched Address: {new_address}")
