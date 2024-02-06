@@ -56,5 +56,6 @@ if __name__ == "__main__":
     import SetupEnv
     testing = True
     SetupEnv.setup()
-    img = Image.open("FamilyCamping-2021-GettyImages-948512452-2.webp")
+    # img = Image.open("FamilyCamping-2021-GettyImages-948512452-2.webp")
+    img = Image.open("IMG_7223.JPG")
     print(ProjectRun(User(img), img, st).SystemRun())
